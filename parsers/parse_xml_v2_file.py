@@ -454,7 +454,11 @@ def get_related_patents_data(tree_root):
     return related_patents
 
 def read_data_from_url_xml_2(url):
-    response = requests.get(url)
+    headers = {
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache"
+    }
+    response = requests.get(url, headers=headers)
     read_url = ZipFile(BytesIO(response.content))
     file_name = list(filter(lambda file: '.xml' in file.lower(), read_url.namelist()))[0]
     data_bytes = read_url.open(file_name).readlines()

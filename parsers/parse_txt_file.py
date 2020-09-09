@@ -383,10 +383,15 @@ def parse_txt_patent_data(patent_text_data,source_url=None, data_items_list = ['
 
 
 def read_data_from_url_txt(url):
+    headers = {
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache"
+    }
+
     trial = 1
     while trial < 6:
         try:
-            response = requests.get(url)
+            response = requests.get(url, headers=headers)
             read_url = ZipFile(BytesIO(response.content))
             file_name = list(filter(lambda file: '.txt' in file, read_url.namelist()))[0]
             data_bytes = read_url.open(file_name).readlines()
