@@ -45,7 +45,7 @@ def read_and_parse_yearly_data(year, data_items):
                 for patent in patent_data:
                     root_tree = ElementTree(fromstring(patent))
                     full_yearly_data.append(parse_patent_data_xml_4(root_tree,source_url = url,data_items_list=data_items))
-            time.sleep(30 + random.choice(range(10)))
+            time.sleep(5 + random.choice(range(3)))
         return full_yearly_data
     else:
         print(f'ERROR: Invalid year argument "{year}". Year must be an integer number between 1975 and 2020')
@@ -143,7 +143,7 @@ def download_yearly_data(year,data_items):
                 for patent in patent_data:
                     root_tree = ElementTree(fromstring(patent))
                     full_yearly_data.append(parse_patent_data_xml_4(root_tree,source_url = url,data_items_list=data_items))
-            time.sleep(30 + random.choice(range(10)))
+            time.sleep(5 + random.choice(range(3)))
         return full_yearly_data
     else:
         print(f'ERROR: Invalid year argument "{year}". Year must be an integer number greater than or equal 1976')
