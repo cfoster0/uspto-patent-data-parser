@@ -396,14 +396,16 @@ def read_data_from_url_txt(url):
             file_name = list(filter(lambda file: '.txt' in file, read_url.namelist()))[0]
             data_bytes = read_url.open(file_name).readlines()
             data_string = [i.decode(errors="ignore").replace('\r\n','').replace('\n','').replace('\r','') for i in data_bytes]
-            patents= get_patents_list(data_string)
+            patents = get_patents_list(data_string)
             read_url.close()
             return patents
-        except:
+        except Exception as e:
+            print(f'Exception: {e}')
             trial += 1
-            if trial ==5:
+            if trial == 5:
                 print(f'Failed to download file {url}')
             else:
+                print(f'Trying again to download file {url}')
                 time.sleep(10)
 
 def read_and_parse_txt_from_disk(path_to_file,data_items):

@@ -81,7 +81,6 @@ def read_data_from_url_xml_4(url):
         "Pragma": "no-cache"
     }
     response = requests.get(url, headers=headers)
-    print("RESPONSE CODE: ", response.status_code)
     read_url = ZipFile(BytesIO(response.content))
     file_name = list(filter(lambda file: '.xml' in file.lower(), read_url.namelist()))[0]
     data_bytes = read_url.open(file_name).readlines()
